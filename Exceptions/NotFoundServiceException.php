@@ -2,8 +2,8 @@
 
 namespace Exceptions;
 /*
- * Abstract Class PaymentService
- * @package App\Services\PaymentServices
+ * Class NotFoundServiceException
+ * @package Exceptions
  */
 
 class NotFoundServiceException extends \Exception{

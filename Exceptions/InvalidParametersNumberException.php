@@ -2,8 +2,8 @@
 
 namespace Exceptions;
 /*
- * Abstract Class PaymentService
- * @package App\Services\PaymentServices
+ * Class InvalidParametersNumberException
+ * @package Exceptions
  */
 
 class InvalidParametersNumberException extends \Exception{

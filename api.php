@@ -8,21 +8,20 @@ if(count($argv)<3) {
     echo new \Exceptions\InvalidParametersNumberException("Invalid number of parameters");
     exit;
 }
-$service = $configArr['default_service'];
+$repoIndex = 2;
 
-$gitIndex = 1;
-$serviceArr = getopt(null, ["service:"]);
+$service = getopt(null, ["service:"])['service'] ?? NULL;
 
-if(!empty($serviceArr)){
-	$service = $serviceArr['service'];
-	$gitIndex++;
+if(!$service){
+    $repoIndex--;
+    $service = $configArr['default_service'];
 }
 
-$repo = $argv[$gitIndex];
-$branch = $argv[$gitIndex + 1];
+$repo = $argv[$repoIndex];
+$branch = $argv[$repoIndex + 1];
 
 if(empty($configArr['services'][$service])) {
-    echo new \Exceptions\NotFoundServiceException("Unknown service {$service}");
+    echo new \Exceptions\NotFoundServiceException("Unknown service '{$service}'");
     exit;
 }
 

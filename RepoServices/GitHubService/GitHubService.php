@@ -3,8 +3,8 @@
 namespace RepoServices\GitHubService;
 use RepoServices\RepoService as Repo;
 /*
- * Abstract Class PaymentService
- * @package App\Services\PaymentServices
+ * Class GitHubService
+ * @package RepoServices\GitHubService
  */
 
 class GitHubService extends Repo {
@@ -15,8 +15,28 @@ class GitHubService extends Repo {
      * @var array
      */
     protected $config;
-	
+
+    /**
+     * API user agent.
+     *
+     * @var string
+     */
 	protected $userAgent = 'gitUser';
+    /**
+     * API repo.
+     *
+     * @var string
+     */
+    protected $repo;
+    /**
+     * API branch.
+     *
+     * @var string
+     */
+    protected $branch;
+	
+	protected const URL = 'https://api.github.com';
+
     /**
      * Function to set payment API Configuration.
      *
@@ -24,12 +44,6 @@ class GitHubService extends Repo {
      *
      * @throws \Exception
      */
-    protected $repo;
-
-    protected $branch;
-	
-	protected const URL = 'https://api.github.com';
-
     public function setConfig(array $config = [], $configName = '')
     {
 			// Set Api Credentials
@@ -61,7 +75,9 @@ class GitHubService extends Repo {
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         $response = curl_exec($curl);
 
-        return json_decode($response, true);
+        $result = json_decode($response, true);
+
+        return $result;
 	}
 	
     /**
