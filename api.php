@@ -17,7 +17,7 @@ $git = $argv[$gitIndex];
 $branch = $argv[$gitIndex + 1];
 
 
-//echo "Git: {$git}, branch: {$branch}, service: {$service}";
+echo "Git: {$git}, branch: {$branch}, service: {$service}";
 
 spl_autoload_register(function ($class) {
             $file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
