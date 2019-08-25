@@ -64,4 +64,6 @@ abstract class RepoService {
      */
     public abstract function setApiCredentials(array $credentials);
 
+    public abstract function getLastCommit();
+
 }

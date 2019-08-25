@@ -1,33 +1,35 @@
 <?php
 
-if(count($argv)<3) {
-	throw new \Exception('błąd');
-}
-$gitIndex = 1;
+require_once 'autoloader.php';
 
+$configArr = require_once 'config.php';
+
+if(count($argv)<3) {
+    echo new \Exceptions\InvalidParametersNumberException("Invalid number of parameters");
+    exit;
+}
+$service = $configArr['default_service'];
+
+$gitIndex = 1;
 $serviceArr = getopt(null, ["service:"]);
-$service = 'github';
 
 if(!empty($serviceArr)){
 	$service = $serviceArr['service'];
 	$gitIndex++;
 }
 
-$git = $argv[$gitIndex];
+$repo = $argv[$gitIndex];
 $branch = $argv[$gitIndex + 1];
 
+if(empty($configArr['services'][$service])) {
+    echo new \Exceptions\NotFoundServiceException("Unknown service {$service}");
+    exit;
+}
 
-echo "Git: {$git}, branch: {$branch}, service: {$service}";
+$serviceClass = $configArr['services'][$service];
 
-spl_autoload_register(function ($class) {
-            $file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
-            if (file_exists($file)) {
-                require $file;
-                return true;
-            }
-            return false;
-        });
+$repoService = new $serviceClass();
 
-$git = new RepoServices\GitHubService\GitHubService();
+$repoService->setConfig(['repo'=>$repo,'branch'=>$branch]);
 
-$git->setConfig([]);
+echo $repoService->getLastCommit();

@@ -22,6 +22,10 @@ class GitHubService extends Repo {
      *
      * @throws \Exception
      */
+    protected $repo;
+
+    protected $branch;
+
     public function setConfig(array $config = [], $configName = '')
     {
         // Set Api Credentials
@@ -57,7 +61,23 @@ class GitHubService extends Repo {
 	}
 	
 	public function setApiCredentials(array $credentials){
-		
+		$this->repo = $credentials['repo'];
+        $this->branch = $credentials['branch'];
 	}
+
+	public function getLastCommit(){
+        $objCurl = curl_init();
+
+        curl_setopt($objCurl, CURLOPT_URL, "https://api.github.com/repos/{$this->repo}/branches/{$this->branch}");
+
+        curl_setopt($objCurl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($objCurl, CURLOPT_USERAGENT, "GitApp");
+        curl_setopt($objCurl, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($objCurl);
+
+        $resultArr = json_decode($response, true);
+
+        return $resultArr['commit']['sha']??'';
+    }
 
 }
