@@ -15,6 +15,8 @@ class GitHubService extends Repo {
      * @var array
      */
     protected $config;
+	
+	protected $userAgent = 'gitUser';
     /**
      * Function to set payment API Configuration.
      *
@@ -25,10 +27,12 @@ class GitHubService extends Repo {
     protected $repo;
 
     protected $branch;
+	
+	protected const URL = 'https://api.github.com';
 
     public function setConfig(array $config = [], $configName = '')
     {
-        // Set Api Credentials
+			// Set Api Credentials
         if (function_exists('config')) {
             $this->setApiCredentials(
                 config($configName)
@@ -45,6 +49,21 @@ class GitHubService extends Repo {
     public function getConfig($anchor) {
         return $this->config[$anchor] ?? NULL;
     }
+	
+	public final function callService($repo, $branch){
+		$url = self::URL;
+		$curl = curl_init();
+		
+		curl_setopt($curl, CURLOPT_URL, "{$url}/repos/{$repo}/branches/{$branch}");
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_USERAGENT, $this->userAgent);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($curl);
+
+        return json_decode($response, true);
+	}
+	
     /**
      * Function to log API errors.
      *
@@ -66,16 +85,7 @@ class GitHubService extends Repo {
 	}
 
 	public function getLastCommit(){
-        $objCurl = curl_init();
-
-        curl_setopt($objCurl, CURLOPT_URL, "https://api.github.com/repos/{$this->repo}/branches/{$this->branch}");
-
-        curl_setopt($objCurl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($objCurl, CURLOPT_USERAGENT, "GitApp");
-        curl_setopt($objCurl, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($objCurl);
-
-        $resultArr = json_decode($response, true);
+        $resultArr = $this->callService($this->repo, $this->branch);
 
         return $resultArr['commit']['sha']??'';
     }

@@ -50,6 +50,7 @@ abstract class RepoService {
     {
         \Log::info($this->getConfig('name') . ' API error occurs; time: ' . date('Y-m-d G:i:s') . ' code: ' . $code . ', message: ' . $message);
     }
+	
 
     /**
      * Abstract function to check API Payment Response.
@@ -57,6 +58,13 @@ abstract class RepoService {
      * @return mixed
      */
     public abstract function checkResponse(array $request_arr);
+	/**
+     * Abstract function to check API Payment Response.
+     *
+     * @return mixed
+     */
+    public abstract function callService($repo, $branch);
+	
     /**
      * Abstract function to set API Credentials.
      *
