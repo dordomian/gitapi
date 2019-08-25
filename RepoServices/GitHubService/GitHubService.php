@@ -1,7 +1,8 @@
 <?php
 
 namespace RepoServices\GitHubService;
-use RepoServices\Traits\CurlApiService;
+use RepoServices\Exceptions\RepoServiceException;
+use RepoServices\Traits\CurlCallingApiService;
 use RepoServices\RepoService;
 /*
  * Class GitHubService
@@ -9,7 +10,7 @@ use RepoServices\RepoService;
  */
 
 class GitHubService extends RepoService {
-    use CurlApiService;
+    use CurlCallingApiService;
 
     /**
      * API configuration.
@@ -50,7 +51,6 @@ class GitHubService extends RepoService {
      *
      * @param array $config
      *
-     * @throws \Exception
      */
     public function setConfig(array $config = [], $configName = '')
     {
@@ -123,16 +123,33 @@ class GitHubService extends RepoService {
         return $this->branch = $branch;
     }
 
-	public function checkResponse(array $request_arr){
-		
+    /**
+     * Check API Response.
+     *
+     * @return bool
+     * @throws \RepoServices\Exceptions\RepoServiceException
+     */
+	public function checkResponse(array $resultArr){
+        if(!empty($resultArr['message'])) {
+            throw new RepoServiceException($resultArr['message']);
+        }
+        return true;
 	}
 
-	public function getLastCommit(){
+    /**
+     * Get API last commit info.
+     *
+     * @return bool
+     * @throws \RepoServices\Exceptions\RepoServiceException
+     */
+	public function getLastCommit($repo, $branch){
 
-        $this->setUrl(self::URL . '/' . "{$this->getResource()}/{$this->getRepo()}/branches/{$this->getBranch()}");
+        $this->setUrl(self::URL . '/' . "{$this->getResource()}/{$repo}/branches/{$branch}");
+
         $resultArr = $this->callService();
+        $this->checkResponse($resultArr);
 
-        return $resultArr['commit']['sha']??'';
+        return $resultArr['commit'] ?? NULL;
     }
 
 }

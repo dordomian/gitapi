@@ -28,7 +28,10 @@ if(empty($configArr['services'][$service])) {
 $serviceClass = $configArr['services'][$service];
 
 $repoService = new $serviceClass();
+try {
+    $lastCommitInfo = $repoService->getLastCommit($repo, $branch);
+    echo $lastCommitInfo['sha'];
 
-$repoService->setConfig(['repo'=>$repo,'branch'=>$branch]);
-
-echo $repoService->getLastCommit();
+} catch(\Exception $exception){
+    echo $exception;
+}

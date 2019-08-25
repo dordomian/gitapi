@@ -1,7 +1,7 @@
 <?php
 namespace RepoServices\Traits;
 
-trait CurlApiService
+trait CurlCallingApiService
 {
     /**
      * API Service approval URL to make payments.

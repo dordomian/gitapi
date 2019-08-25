@@ -2,8 +2,8 @@
 
 namespace RepoServices;
 /*
- * Abstract Class PaymentService
- * @package App\Services\PaymentServices
+ * Abstract Class RepoService
+ * @package RepoServices
  */
 
 abstract class RepoService {
@@ -15,11 +15,10 @@ abstract class RepoService {
      */
     protected $config;
     /**
-     * Function to set payment API Configuration.
+     * Function to set API Configuration.
      *
      * @param array $config
      *
-     * @throws \Exception
      */
     public function setConfig(array $config = [], $configName = '')
     {
@@ -38,22 +37,22 @@ abstract class RepoService {
         return $this->config[$anchor] ?? NULL;
     }
     /**
-     * Abstract function to check API Payment Response.
+     * Abstract function to check API Response.
      *
      * @return mixed
      */
     public abstract function checkResponse(array $request_arr);
 	/**
-     * Abstract function to check API Payment Response.
+     * Abstract function to call API Service.
      *
      * @return mixed
      */
     public abstract function callService($method = 'GET', $data = []);
     /**
-     * Abstract function to set API Credentials.
+     * Abstract function to get API last commit info.
      *
      * @return mixed
      */
-    public abstract function getLastCommit();
+    public abstract function getLastCommit($repo, $branch);
 
 }
