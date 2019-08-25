@@ -126,14 +126,14 @@ class GitHubService extends RepoService {
     /**
      * Check API Response.
      *
-     * @return bool
+     * @return array
      * @throws \RepoServices\Exceptions\RepoServiceException
      */
 	public function checkResponse(array $resultArr){
         if(!empty($resultArr['message'])) {
             throw new RepoServiceException($resultArr['message']);
         }
-        return true;
+        return $resultArr;
 	}
 
     /**
@@ -146,10 +146,9 @@ class GitHubService extends RepoService {
 
         $this->setUrl(self::URL . '/' . "{$this->getResource()}/{$repo}/branches/{$branch}");
 
-        $resultArr = $this->callService();
-        $this->checkResponse($resultArr);
-
-        return $resultArr['commit'] ?? NULL;
+        if($response = $this->checkResponse($this->callService())) {
+            return $response['commit'] ?? NULL;
+        }
     }
 
 }

@@ -39,9 +39,10 @@ abstract class RepoService {
     /**
      * Abstract function to check API Response.
      *
+     * @throws \RepoServices\Exceptions\RepoServiceException
      * @return mixed
      */
-    public abstract function checkResponse(array $request_arr);
+    public abstract function checkResponse(array $resultArr);
 	/**
      * Abstract function to call API Service.
      *
