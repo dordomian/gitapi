@@ -1,7 +1,7 @@
 <?php
 
 namespace RepoServices\GitHubService;
-use RepoServices\Traits\CallApiService;
+use RepoServices\Traits\CurlApiService;
 use RepoServices\RepoService;
 /*
  * Class GitHubService
@@ -9,7 +9,7 @@ use RepoServices\RepoService;
  */
 
 class GitHubService extends RepoService {
-    use CallApiService;
+    use CurlApiService;
 
     /**
      * API configuration.
@@ -129,9 +129,8 @@ class GitHubService extends RepoService {
 
 	public function getLastCommit(){
 
-        $url = "{$this->getResource()}/{$this->getRepo()}/branches/{$this->getBranch()}";
-
-        $resultArr = $this->callService($url);
+        $this->setUrl(self::URL . '/' . "{$this->getResource()}/{$this->getRepo()}/branches/{$this->getBranch()}");
+        $resultArr = $this->callService();
 
         return $resultArr['commit']['sha']??'';
     }

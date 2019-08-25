@@ -48,7 +48,7 @@ abstract class RepoService {
      *
      * @return mixed
      */
-    public abstract function callService($urlResource, $method = 'GET');
+    public abstract function callService($method = 'GET', $data = []);
     /**
      * Abstract function to set API Credentials.
      *

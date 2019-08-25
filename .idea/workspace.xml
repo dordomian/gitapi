@@ -4,7 +4,7 @@
     <list default="true" id="c11d4f61-de50-4600-806b-a47ec6537fc7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/RepoServices/GitHubService/GitHubService.php" beforeDir="false" afterPath="$PROJECT_DIR$/RepoServices/GitHubService/GitHubService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RepoServices/RepoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/RepoServices/RepoService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepoServices/Traits/PaymentTransaction.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepoServices/Traits/CallApiService.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RepoServices/GitHubService/GitHubService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
+            <state relative-caret-position="374">
+              <caret line="132" column="42" lean-forward="true" selection-start-line="132" selection-start-column="42" selection-end-line="132" selection-end-column="42" />
               <folding>
                 <element signature="e#45#98#0#PHP" expanded="true" />
               </folding>
@@ -54,10 +54,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RepoServices/Traits/CallApiService.php">
+        <entry file="file://$PROJECT_DIR$/RepoServices/Traits/CurlApiService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+            <state relative-caret-position="34">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -65,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RepoServices/RepoService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-162">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="238">
+              <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -100,9 +100,10 @@
         <option value="$PROJECT_DIR$/api.php" />
         <option value="$PROJECT_DIR$/Exceptions/InvalidParametersNumberException.php" />
         <option value="$PROJECT_DIR$/Exceptions/NotFoundServiceException.php" />
+        <option value="$PROJECT_DIR$/RepoServices/Traits/CallApiService.php" />
         <option value="$PROJECT_DIR$/RepoServices/RepoService.php" />
         <option value="$PROJECT_DIR$/RepoServices/GitHubService/GitHubService.php" />
-        <option value="$PROJECT_DIR$/RepoServices/Traits/CallApiService.php" />
+        <option value="$PROJECT_DIR$/RepoServices/Traits/CurlApiService.php" />
       </list>
     </option>
   </component>
@@ -182,12 +183,12 @@
       <option name="presentableId" value="Default" />
       <updated>1566719643035</updated>
       <workItem from="1566719644861" duration="3927000" />
-      <workItem from="1566751425401" duration="3766000" />
+      <workItem from="1566751425401" duration="4545000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7693000" />
+    <option name="totallyTimeSpent" value="8472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -290,24 +291,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RepoServices/RepoService.php">
+    <entry file="file://$PROJECT_DIR$/RepoServices/Traits/CallApiService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-162">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="170">
+          <caret line="34" column="19" lean-forward="true" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RepoServices/Traits/CallApiService.php">
+    <entry file="file://$PROJECT_DIR$/RepoServices/RepoService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+        <state relative-caret-position="238">
+          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RepoServices/Traits/CurlApiService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RepoServices/GitHubService/GitHubService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
+        <state relative-caret-position="374">
+          <caret line="132" column="42" lean-forward="true" selection-start-line="132" selection-start-column="42" selection-end-line="132" selection-end-column="42" />
           <folding>
             <element signature="e#45#98#0#PHP" expanded="true" />
           </folding>

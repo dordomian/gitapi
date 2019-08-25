@@ -1,13 +1,32 @@
 <?php
 namespace RepoServices\Traits;
-trait CallApiService
+
+trait CurlApiService
 {
     /**
      * API Service approval URL to make payments.
      *
      * @var string
      */
-    private $approvalServiceUrl;
+    private static $url;
+
+    /**
+     * Function to set url to call.
+     *
+     * @return void
+     */
+    public function setUrl($url){
+        self::$url = $url;
+    }
+
+    /**
+     * Function to get url to call.
+     *
+     * @return string
+     */
+    public function getUrl(){
+        return self::$url;
+    }
 
     /**
      * Function to go to Payment Service by Approval URL.
@@ -16,9 +35,9 @@ trait CallApiService
      *
      * @return void
      */
-    public final function callService($urlResource, $method = 'GET', $data = []){
+    public final function callService($method = 'GET', $data = []){
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, self::URL . '/' .  $urlResource);
+        curl_setopt($curl, CURLOPT_URL, $this->getUrl());
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_USERAGENT, $this->userAgent);
