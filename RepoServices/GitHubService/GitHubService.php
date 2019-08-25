@@ -1,13 +1,15 @@
 <?php
 
 namespace RepoServices\GitHubService;
-use RepoServices\RepoService as Repo;
+use RepoServices\Traits\CallApiService;
+use RepoServices\RepoService;
 /*
  * Class GitHubService
  * @package RepoServices\GitHubService
  */
 
-class GitHubService extends Repo {
+class GitHubService extends RepoService {
+    use CallApiService;
 
     /**
      * API configuration.
@@ -23,17 +25,23 @@ class GitHubService extends Repo {
      */
 	protected $userAgent = 'gitUser';
     /**
+     * API resource.
+     *
+     * @var string
+     */
+    private $resource = 'repos';
+    /**
      * API repo.
      *
      * @var string
      */
-    protected $repo;
+    private $repo;
     /**
      * API branch.
      *
      * @var string
      */
-    protected $branch;
+    private $branch;
 	
 	protected const URL = 'https://api.github.com';
 
@@ -46,13 +54,16 @@ class GitHubService extends Repo {
      */
     public function setConfig(array $config = [], $configName = '')
     {
-			// Set Api Credentials
-        if (function_exists('config')) {
-            $this->setApiCredentials(
-                config($configName)
-            );
-        } elseif (!empty($config)) {
-            $this->setApiCredentials($config);
+        parent::setConfig($config, $configName);
+
+        if (!empty($config['repo'])) {
+            $this->setRepo($config['repo']);
+        }
+        if (!empty($config['branch'])) {
+            $this->setBranch($config['branch']);
+        }
+        if (!empty($config['resource'])) {
+            $this->setResource($config['resource']);
         }
     }
     /**
@@ -63,45 +74,64 @@ class GitHubService extends Repo {
     public function getConfig($anchor) {
         return $this->config[$anchor] ?? NULL;
     }
-	
-	public final function callService($repo, $branch){
-		$url = self::URL;
-		$curl = curl_init();
-		
-		curl_setopt($curl, CURLOPT_URL, "{$url}/repos/{$repo}/branches/{$branch}");
-
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_USERAGENT, $this->userAgent);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($curl);
-
-        $result = json_decode($response, true);
-
-        return $result;
-	}
-	
     /**
-     * Function to log API errors.
+     * Get resource.
      *
-     * @param string $code
-     * @param string $message
+     * @return string
      */
-    public function logError(string $code, string $message)
-    {
-        \Log::info($this->getConfig('name') . ' API error occurs; time: ' . date('Y-m-d G:i:s') . ' code: ' . $code . ', message: ' . $message);
+    public function getResource() {
+        return $this->resource;
     }
-	
+    /**
+     * Set resource.
+     *
+     * @return string
+     */
+    public function setResource($resource) {
+        return $this->resource = $resource;
+    }
+    /**
+     * Get repo.
+     *
+     * @return string
+     */
+    public function getRepo() {
+        return $this->repo;
+    }
+    /**
+     * Set repo.
+     *
+     * @return string
+     */
+    public function setRepo($repo) {
+        return $this->repo = $repo;
+    }
+    /**
+     * Get branch.
+     *
+     * @return string
+     */
+    public function getBranch() {
+        return $this->branch;
+    }
+    /**
+     * Set branch.
+     *
+     * @return string
+     */
+    public function setBranch($branch) {
+        return $this->branch = $branch;
+    }
+
 	public function checkResponse(array $request_arr){
 		
 	}
-	
-	public function setApiCredentials(array $credentials){
-		$this->repo = $credentials['repo'];
-        $this->branch = $credentials['branch'];
-	}
 
 	public function getLastCommit(){
-        $resultArr = $this->callService($this->repo, $this->branch);
+
+        $url = "{$this->getResource()}/{$this->getRepo()}/branches/{$this->getBranch()}";
+
+        $resultArr = $this->callService($url);
 
         return $resultArr['commit']['sha']??'';
     }
