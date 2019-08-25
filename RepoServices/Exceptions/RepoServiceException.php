@@ -2,8 +2,8 @@
 
 namespace RepoServices\Exceptions;
 /*
- * Class NotFoundServiceException
- * @package Exceptions
+ * Class RepoServiceException
+ * @package RepoServices\Exceptions
  */
 
 class RepoServiceException extends \Exception{

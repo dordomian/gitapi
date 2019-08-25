@@ -31,7 +31,7 @@ abstract class RepoService {
     /**
      * Get config.
      *
-     * @return array|null
+     * @return string|null
      */
     public function getConfig($anchor) {
         return $this->config[$anchor] ?? NULL;
@@ -40,19 +40,19 @@ abstract class RepoService {
      * Abstract function to check API Response.
      *
      * @throws \RepoServices\Exceptions\RepoServiceException
-     * @return mixed
+     * @return array
      */
     public abstract function checkResponse(array $resultArr);
 	/**
      * Abstract function to call API Service.
      *
-     * @return mixed
+     * @return void
      */
     public abstract function callService($method = 'GET', $data = []);
     /**
      * Abstract function to get API last commit info.
      *
-     * @return mixed
+     * @return array
      */
     public abstract function getLastCommit($repo, $branch);
 

@@ -4,13 +4,13 @@ require_once 'autoloader.php';
 
 $configArr = require_once 'config.php';
 
-if(count($argv)<3) {
+$service = getopt(null, ["service:"])['service'] ?? NULL;
+
+if($service && count($argv) < 4 || !$service && count($argv) < 3) {
     echo new \Exceptions\InvalidParametersNumberException("Invalid number of parameters");
     exit;
 }
 $repoIndex = 2;
-
-$service = getopt(null, ["service:"])['service'] ?? NULL;
 
 if(!$service){
     $repoIndex--;

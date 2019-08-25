@@ -4,14 +4,14 @@ namespace RepoServices\Traits;
 trait CurlCallingApiService
 {
     /**
-     * API Service approval URL to make payments.
+     * API Service URL to making call.
      *
      * @var string
      */
     private static $url;
 
     /**
-     * Function to set url to call.
+     * Function to set url to making call.
      *
      * @return void
      */
@@ -20,7 +20,7 @@ trait CurlCallingApiService
     }
 
     /**
-     * Function to get url to call.
+     * Function to get url.
      *
      * @return string
      */
@@ -29,7 +29,7 @@ trait CurlCallingApiService
     }
 
     /**
-     * Function to go to Payment Service by Approval URL.
+     * Function to call API Service.
      *
      * @throws \Exception
      *
